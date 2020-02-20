@@ -1,10 +1,8 @@
-
-
 class BeerProject::CLI
   
   def start
   puts "Lets find a brewery"
-  BeerProject::Scraper.new.get_page
+  BeerProject::Scraper.scrape_brewery_info
   end
   
   
