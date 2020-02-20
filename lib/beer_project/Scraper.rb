@@ -1,5 +1,5 @@
-require 'nokogiri'
-require 'rubygems'
+#require 'nokogiri'
+#require 'rubygems'
 class BeerProject::Scraper
   #attr_accessor :site
   
