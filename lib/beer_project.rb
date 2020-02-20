@@ -4,6 +4,7 @@ require_relative "./beer_project/Scraper"
 require 'pry'
 require 'nokogiri'
 require 'open-uri'
+require 'rubygems'
 
 module BeerProject
   class Error < StandardError; end
