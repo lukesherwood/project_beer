@@ -1,5 +1,4 @@
-#require 'nokogiri'
-#require 'open-uri'
+
 class Scraper
   def initialize(site)
     @site = site
