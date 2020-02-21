@@ -1,8 +1,10 @@
 class BeerProject::CLI
   
   def start
-  puts "Lets find a brewery"
-  breweries
+  puts "What city are you in?"
+  cities
+  #puts "Lets find a brewery"
+  #breweries
   end
   
   def breweries
@@ -13,5 +15,11 @@ class BeerProject::CLI
     end
   end
   
+  def cities
+  BeerProject::City.all.each.with_index(1) do |city, index|
+      puts "\n#{index}. #{city.name}"
+      puts brewery.website
+    end
+  end
   
 end

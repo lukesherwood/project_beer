@@ -22,7 +22,7 @@ class BeerProject::Scraper
     things.each do |thing|
       name = thing.css(".card__tag").attr("data-tag").text
       website = thing.css(".comp.card").attr("href").text
-      BeerProject::Cities.new(name, website)
+      BeerProject::City.new(name, website)
     end
   end
  
