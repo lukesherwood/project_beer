@@ -1,10 +1,14 @@
 class BeerProject::Scraper
-  #attr_accessor :site
+  attr_accessor :site
   
-
-#site = "https://www.tripsavvy.com/best-breweries-in-cleveland-4688970"
+  def site=(site)
+    ##not working
+    @site = site
+  end
+  
+  #"https://www.tripsavvy.com/best-breweries-in-cleveland-4688970"
   def self.scrape_brewery_info
-  doc = Nokogiri::HTML(open("https://www.tripsavvy.com/best-breweries-in-cleveland-4688970"))
+  doc = Nokogiri::HTML(open(@site))
   things = doc.css(".comp.list-sc-item.mntl-block")
   
   things.each do |thing|
