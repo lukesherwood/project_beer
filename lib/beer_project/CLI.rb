@@ -17,8 +17,7 @@ class BeerProject::CLI
   
   def cities
   BeerProject::City.all.each.with_index(1) do |city, index|
-      puts "\n#{index}. #{city.name}"
-      puts brewery.website
+      puts "#{index}. #{city.name}"
     end
   end
   

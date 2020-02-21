@@ -1,16 +1,15 @@
 class BeerProject::City
-  attr_accessor :name
-  
-  def intitalize(name, website)
+  attr_accessor :name, :website
+  @@all = []
+  def initialize(name, website)
     @name = name
-    @webstie = website
+    @website = website
     @@all << self
   end
   
-  @@all = []
-  
   def self.all
-    @@all
+    BeerProject::Scraper.scrape_cities if @@all.empty? 
+    @@all.delete_if{|city| city.name == "Things To Do" || city.name =="Restaurants" || city.name =="Nightlife" || city.name =="Inspiration"}
   end
   
   
