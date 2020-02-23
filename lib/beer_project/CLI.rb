@@ -30,11 +30,11 @@ class BeerProject::CLI
   
   def get_user_city
     chosen_city_number = gets.strip.to_i-1
-    show_breweries_for(chosen_city_number) if valid_input(chosen_city_number, @cities)
-    
+    show_breweries_for(chosen_city_number) if valid_input?(chosen_city_number, @cities)
+    #need to raise an error if valid_input? is false
   end
   
-  def valid_input(input, data)
+  def valid_input?(input, data)
     input.to_i <= data.length && input.to_i >= 0
   end
   

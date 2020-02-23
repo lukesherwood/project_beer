@@ -12,6 +12,7 @@ class BeerProject::Scraper
   
   things.each do |thing|
     name = thing.css(".mntl-sc-block-heading__text").text
+    name = thing.css(".mntl-sc-block-heading__link").text if name == ""
     website = thing.css(".mntl-sc-block-location__website-text").attr("href")
     address = thing.css(".mntl-sc-block-location__address").text.strip
     BeerProject::Brewery.new(name, address, website)
