@@ -1,7 +1,6 @@
 class BeerProject::Scraper
-  attr_accessor :site
   
-  def site=(site)
+  def self.site=(site)
     ##not working
     @site = site
   end

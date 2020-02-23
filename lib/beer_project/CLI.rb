@@ -18,8 +18,7 @@ class BeerProject::CLI
   end
   
   def breweries
-    puts "\nLets find a brewery!!!"
-    puts "\nSelect a brewery you want to know more about by entering the number"
+    puts "\nEnter the number of the brewery you want to know more about"
     BeerProject::Brewery.all.each.with_index(1) do |brewery, index|
       puts "\n#{index}. #{brewery.name}"
       puts brewery.address
@@ -36,13 +35,15 @@ class BeerProject::CLI
   end
   
   def valid_input(input, data)
-    input.to_i <= data.length && input.to_i > 0
+    input.to_i <= data.length && input.to_i >= 0
   end
   
   def show_breweries_for(chosen_city_number)
     puts "Showing breweries in #{@cities[chosen_city_number].name}"
     ##not working
+    #binding.pry
     BeerProject::Scraper.site = @cities[chosen_city_number].website
+    
   end
   
 end
