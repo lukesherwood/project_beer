@@ -11,11 +11,13 @@ class BeerProject::Scraper
   things = doc.css(".comp.list-sc-item.mntl-block")
   
   things.each do |thing|
-    name = thing.css(".mntl-sc-block-heading__text").text
-    name = thing.css(".mntl-sc-block-heading__link").text if name == ""
-    website = thing.css(".mntl-sc-block-location__website-text").attr("href")
-    address = thing.css(".mntl-sc-block-location__address").text.strip
-    BeerProject::Brewery.new(name, address, website)
+      name =        thing.css(".mntl-sc-block-heading__text").text
+      name =        thing.css(".mntl-sc-block-heading__link").text if name == "" #covers case if name is a link
+      website =     thing.css(".mntl-sc-block-location__website-text").attr("href")
+      address =     thing.css(".mntl-sc-block-location__address").text.strip
+      blurb =       thing.css(".comp.text-passage").text
+      phone_number= thing.css(".mntl-sc-block-location__phone-text").text
+    BeerProject::Brewery.new(name, address, website, blurb, phone_number)
     end
   end
   
