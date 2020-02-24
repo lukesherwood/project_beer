@@ -31,9 +31,10 @@ class BeerProject::CLI
     begin
     chosen_brewery_number = gets.strip.to_i-1
     show_brewery_info(chosen_brewery_number) if valid_input?(chosen_brewery_number, @breweries)
-    rescue NoMethodError
+    rescue 
     puts "That isn't a valid option"
     get_user_brewery
+    #need to add something for string entered
     end
   end
   
@@ -41,10 +42,11 @@ class BeerProject::CLI
     begin
     chosen_city_number = gets.strip.to_i-1
     show_breweries_for(chosen_city_number) if valid_input?(chosen_city_number, @cities)
-    rescue NoMethodError
+    rescue
     puts "That isn't a valid option"
     get_user_city
     end
+    #need to add something for string entered
   end
   
   def valid_input?(input, data)
