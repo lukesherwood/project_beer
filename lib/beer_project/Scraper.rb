@@ -24,7 +24,32 @@ class BeerProject::Scraper
   end
   
   def self.scrape_cities
-    @pages = ["https://www.tripsavvy.com/search?q=best%20breweries", "https://www.tripsavvy.com/search?q=best%20breweries&offset=24", "https://www.tripsavvy.com/search?q=best%20breweries&offset=48]"]
+    self.scrape_cities_page1
+    self.scrape_cities_page2
+  end
+  
+  def self.scrape_cities_page1
+    @pages = ["https://www.tripsavvy.com/search?q=best%20breweries", "https://www.tripsavvy.com/search?q=best%20breweries&offset=24", "https://www.tripsavvy.com/search?q=best%20breweries&offset=48"]
+    
+    doc = Nokogiri::HTML(open(@pages[0]))
+
+    things = doc.css(".comp.l-container.search-results-list li")
+    things.each do |thing|
+      begin
+      name = thing.css(".card__tag").attr("data-tag").text
+      website = thing.css(".comp.card").attr("href").text
+      rescue NoMethodError
+        next
+      #need to add a error that misses cities without all information
+      else
+      BeerProject::City.new(name, website)
+      end
+    end
+  end
+  
+  def self.scrape_cities_page2
+    @pages = ["https://www.tripsavvy.com/search?q=best%20breweries", "https://www.tripsavvy.com/search?q=best%20breweries&offset=24", "https://www.tripsavvy.com/search?q=best%20breweries&offset=48"]
+    
     doc = Nokogiri::HTML(open(@pages[1]))
 
     things = doc.css(".comp.l-container.search-results-list li")
