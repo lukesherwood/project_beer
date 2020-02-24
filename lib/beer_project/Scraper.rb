@@ -14,10 +14,11 @@ class BeerProject::Scraper
       name =        thing.css(".mntl-sc-block-heading__text").text
       name =        thing.css(".mntl-sc-block-heading__link").text if name == "" #covers case if name is a link
       website =     thing.css(".mntl-sc-block-location__website-text").attr("href") 
-      website =     thing.css(".mntl-sc-block-heading__link").attr("href") if website == "" #covers edge case when no website, but website in name link
+      website =     thing.css(".mntl-sc-block-heading__link").attr("href") if website == nil #covers edge case when no website, but website in name link
       address =     thing.css(".mntl-sc-block-location__address").text.strip
       blurb =       thing.css(".comp.text-passage").text
       phone_number= thing.css(".mntl-sc-block-location__phone-text").text
+      
     BeerProject::Brewery.new(name, address, website, blurb, phone_number)
     end
   end

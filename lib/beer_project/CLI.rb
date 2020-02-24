@@ -23,7 +23,7 @@ class BeerProject::CLI
     @breweries = BeerProject::Brewery.all
     @breweries.each.with_index(1) do |brewery, index|
       puts "\n#{index}. #{brewery.name}"
-      puts brewery.address
+      puts brewery.address if brewery.address != ""
     end
   end
   
