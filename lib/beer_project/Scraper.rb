@@ -9,12 +9,11 @@ class BeerProject::Scraper
   def self.scrape_brewery_info
   begin
   doc = Nokogiri::HTML(open(@site))
+  things = doc.css(".comp.list-sc-item.mntl-block")
   rescue
   puts "\nThat is not valid\n"
   BeerProject::CLI.new.start
   end
-  things = doc.css(".comp.list-sc-item.mntl-block")
-  
   things.each do |thing|
       name =        thing.css(".mntl-sc-block-heading__text").text
       name =        thing.css(".mntl-sc-block-heading__link").text if name == "" #covers case if name is a link
