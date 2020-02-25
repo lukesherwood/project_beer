@@ -7,7 +7,12 @@ class BeerProject::Scraper
   
   #"https://www.tripsavvy.com/best-breweries-in-cleveland-4688970"
   def self.scrape_brewery_info
+  begin
   doc = Nokogiri::HTML(open(@site))
+  rescue
+  puts "\nThat is not valid\n"
+  BeerProject::CLI.new.start
+  end
   things = doc.css(".comp.list-sc-item.mntl-block")
   
   things.each do |thing|
