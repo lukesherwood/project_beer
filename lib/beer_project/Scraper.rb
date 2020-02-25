@@ -24,7 +24,10 @@ class BeerProject::Scraper
       blurb =       thing.css(".comp.text-passage").text
       phone_number= thing.css(".mntl-sc-block-location__phone-text").text
       
-    BeerProject::Brewery.new(name, address, website, blurb, phone_number)
+    brewery = BeerProject::Brewery.new(name, address)
+    brewery.website = website
+    brewery.blurb = blurb
+    brewery.phone_number = phone_number
     end
   end
   

@@ -30,29 +30,40 @@ class BeerProject::CLI
   def get_user_brewery
     begin
     chosen_brewery_number = gets.strip.to_i-1
-    show_brewery_info(chosen_brewery_number) if valid_input?(chosen_brewery_number, @breweries)
-    rescue NoMethodError
+    rescue
     puts "\nThat isn't a valid option"
     sleep(1)
     get_user_brewery
-    #need to add something for string entered
+    end
+    if valid_input?(chosen_brewery_number, @breweries)
+      show_brewery_info(chosen_brewery_number) 
+    else
+      puts "\nThat isn't a valid option"
+      sleep(1)
+      get_user_brewery
     end
   end
   
   def get_user_city
     begin
     chosen_city_number = gets.strip.to_i-1
-    show_breweries_for(chosen_city_number) if valid_input?(chosen_city_number, @cities)
     rescue 
     puts "\nThat isn't a valid option"
     sleep(1)
     get_user_city
     end
+    if valid_input?(chosen_city_number, @cities) 
+      show_breweries_for(chosen_city_number)
+    else 
+      puts "\nThat isn't a valid option"
+      sleep(1)
+      get_user_city
+    end
     #need to add something for string entered
   end
   
   def valid_input?(input, data)
-    input.to_i <= data.length && input.to_i >= 0
+    input.to_i <= data.length && input.to_i >= 0 
   end
   
   def show_breweries_for(city_number)
@@ -63,7 +74,7 @@ class BeerProject::CLI
   def show_brewery_info(brewery_number)
     puts "\nShowing informaton for:\n#{@breweries[brewery_number].name}"
     puts @breweries[brewery_number].blurb
-    puts "\nPhone:#{@breweries[brewery_number].phone_number}"
-    puts "Find more information at their website: #{@breweries[brewery_number].website}"
+    puts "\nPhone:#{@breweries[brewery_number].phone_number}" unless @breweries[brewery_number].phone_number = ""
+    puts "Find more information at their website: #{@breweries[brewery_number].website}" unless @breweries[brewery_number].website == ""
   end
 end

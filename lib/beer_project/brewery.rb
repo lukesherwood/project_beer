@@ -3,12 +3,9 @@ class BeerProject::Brewery
   
   attr_accessor :name, :address, :website, :blurb, :phone_number
   
-  def initialize(name, address, website, blurb, phone_number)
+  def initialize(name, address)
 	  @name = name
 	  @address = address
-	  @website = website
-	  @blurb = blurb
-	  @phone_number = phone_number
 		@@all << self
   end
   
