@@ -12,6 +12,7 @@ class BeerProject::Scraper
   things = doc.css(".comp.list-sc-item.mntl-block")
   rescue
   puts "\nThat is not valid\n"
+  sleep(2)
   BeerProject::CLI.new.start
   end
   things.each do |thing|
