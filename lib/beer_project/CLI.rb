@@ -1,20 +1,23 @@
 class BeerProject::CLI
-  
+  @input = ""
   def start
-  puts "Welcome to Find a Brewery CLI app"
-  cities
-  get_user_city
-  breweries
-  get_user_brewery
+    while @input != "exit" do
+    puts "Welcome to Find a Brewery CLI app"
+    puts "\nAt any time type exit to close the app"
+    cities
+    get_user_city
+    breweries
+    get_user_brewery
+    end
   end
   
   def cities
     #need to add other pages of search
-    puts "What city are you in?"
+    puts "\nWhat city are you in?"
     @cities = BeerProject::City.all
-    puts "Choose your city by entering the number"
+    puts "Choose your city by entering the number\n"
     @cities.each.with_index(1) do |city, index|
-      puts "#{index}. #{city.name}\n"
+      puts "#{index}. #{city.name}"
     end
   end
   
@@ -23,11 +26,14 @@ class BeerProject::CLI
     @breweries = BeerProject::Brewery.all
     @breweries.each.with_index(1) do |brewery, index|
       puts "\n#{index}. #{brewery.name}"
-      puts brewery.address if brewery.address != ""
+      puts brewery.address unless brewery.address == ""
     end
   end
   
   def get_user_brewery
+    if gets.strip == "exit"
+      @input = "exit"
+    else
     begin
     chosen_brewery_number = gets.strip.to_i-1
     rescue
@@ -42,9 +48,13 @@ class BeerProject::CLI
       sleep(1)
       get_user_brewery
     end
+    end
   end
   
   def get_user_city
+    if gets.strip == "exit"
+      @input = "exit"
+    else 
     begin
     chosen_city_number = gets.strip.to_i-1
     rescue 
@@ -59,7 +69,7 @@ class BeerProject::CLI
       sleep(1)
       get_user_city
     end
-    #need to add something for string entered
+    end
   end
   
   def valid_input?(input, data)

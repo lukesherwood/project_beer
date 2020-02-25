@@ -1,11 +1,9 @@
 class BeerProject::Scraper
   
   def self.site=(site)
-    ##not working
     @site = site
   end
   
-  #"https://www.tripsavvy.com/best-breweries-in-cleveland-4688970"
   def self.scrape_brewery_info
   begin
   doc = Nokogiri::HTML(open(@site))
