@@ -98,12 +98,12 @@ class BeerProject::CLI
     #do we need an address shown here or on intial puts?
     puts @breweries[brewery_number].blurb
     puts "\nPhone:#{@breweries[brewery_number].phone_number}" unless @breweries[brewery_number].phone_number = ""
-    #puts "\nFind more information at their website: #{@breweries[brewery_number].website}" unless @breweries[brewery_number].website == ""
-    puts "If you would like to go to their website type Y" unless @breweries[brewery_number].website == ""
-    @input = gets.strip.downcase
-    if @input == "y"
-      Launchy.open("#{@breweries[brewery_number].website}")
-    end
+    puts "\nFind more information at their website: #{@breweries[brewery_number].website}" unless @breweries[brewery_number].website == ""
+    #puts "If you would like to go to their website type Y" unless @breweries[brewery_number].website == ""
+    #@input = gets.strip.downcase
+    #if @input == "y"
+     # system("open", "#{@breweries[brewery_number].website}")
+    #end
     #can we open website if they ask to?, or even open in maps with address?
   end
   
