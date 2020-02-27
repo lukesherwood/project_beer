@@ -99,8 +99,13 @@ class BeerProject::CLI
   
   def gets_exit_or_restart
     puts "Do you want to see any other cities? Y or exit"
-    @input = gets.strip
-    start if @input == "Y"
+    @input = gets.strip.downcase
+    if @input == "y"
+      BeerProject::Brewery.clear
+      start
+    else 
+      puts "Please enter Y or exit"
+    end
   end
   
 end
