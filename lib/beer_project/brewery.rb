@@ -3,7 +3,7 @@ class BeerProject::Brewery
   
   attr_accessor :name, :address, :website, :blurb, :phone_number
   
-  does brewery need to know about its city?
+  #does brewery need to know about its city?
   
   def initialize(name, address)
 	  @name = name

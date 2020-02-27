@@ -1,13 +1,16 @@
 class BeerProject::CLI
   @input = ""
   def start
-    #need to start a loop while input != 'exit' do
+    #need to start a loop
+    while @input != 'exit' do
     puts "Welcome to Find a Brewery CLI app"
-    puts "\nAt any time type exit to close the app"
+    puts "\nType exit at any time to close the app"
     cities
     get_user_city
     breweries
     get_user_brewery
+    gets_exit_or_restart
+    end
   end
   
   def cities
@@ -29,8 +32,9 @@ class BeerProject::CLI
   end
   
   def get_user_brewery
+    @input = gets.strip
     begin
-    chosen_brewery_number = gets.strip.to_i-1
+    chosen_brewery_number = @input.to_i-1
     rescue
     puts "\nThat isn't a valid option"
     sleep(1)
@@ -47,20 +51,26 @@ class BeerProject::CLI
   end
   #this is a duplicate from below can we abstract and combine?
   def get_user_city
-    begin
-    chosen_city_number = gets.strip.to_i-1
-    rescue 
-    puts "\nThat isn't a valid option"
-    sleep(1)
-    get_user_city
-    end
-    if valid_input?(chosen_city_number, @cities) 
-      show_breweries_for(chosen_city_number)
-    else 
-      puts "\nThat isn't a valid option"
-      sleep(1)
-      get_user_city
+    @input = gets.strip
+    if @input == "exit"
+      exit
+    else
+      binding.pry
+      begin
+        chosen_city_number = @input.to_i-1
+        rescue 
+        puts "\nThat isn't a valid option"
+        sleep(1)
+        get_user_city
+      end
+      if valid_input?(chosen_city_number, @cities) 
+        show_breweries_for(chosen_city_number)
+      else 
+        puts "\nThat isn't a valid option"
+        sleep(1)
+        get_user_city
       #can we combine these two error handlers into one?
+    end
     end
   end
   #this is a duplicate from above can we abstract and combine?
@@ -82,4 +92,11 @@ class BeerProject::CLI
     puts "\nFind more information at their website: #{@breweries[brewery_number].website}" unless @breweries[brewery_number].website == ""
     #can we open website if they ask to?, or even open in maps with address?
   end
+  
+  def gets_exit_or_restart
+    puts "Do you want to see any other cities? Y or exit"
+    @input = gets.strip
+    start if @input == "Y"
+  end
+  
 end
