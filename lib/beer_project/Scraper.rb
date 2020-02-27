@@ -30,6 +30,8 @@ class BeerProject::Scraper
   end
   
   def self.scrape_cities_page1
+    
+    #need to condense this with page2
     @pages = ["https://www.tripsavvy.com/search?q=best%20breweries", "https://www.tripsavvy.com/search?q=best%20breweries&offset=24"]
     
     doc = Nokogiri::HTML(open(@pages[0]))
