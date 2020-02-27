@@ -23,6 +23,7 @@ class BeerProject::CLI
   end
   
   def breweries
+    #second loop we get first loops breweries
     puts "\nEnter the number of the brewery you want to know more about"
     @breweries = BeerProject::Brewery.all
     @breweries.each.with_index(1) do |brewery, index|
@@ -33,6 +34,9 @@ class BeerProject::CLI
   
   def get_user_brewery
     @input = gets.strip
+    if @input == "exit"
+      exit
+    else
     begin
     chosen_brewery_number = @input.to_i-1
     rescue
@@ -48,6 +52,7 @@ class BeerProject::CLI
       get_user_brewery
       #can we combine these two error handlers into one?
     end
+    end
   end
   #this is a duplicate from below can we abstract and combine?
   def get_user_city
@@ -55,7 +60,6 @@ class BeerProject::CLI
     if @input == "exit"
       exit
     else
-      binding.pry
       begin
         chosen_city_number = @input.to_i-1
         rescue 
