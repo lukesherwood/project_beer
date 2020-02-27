@@ -16,6 +16,7 @@ class BeerProject::Scraper
   things.each do |thing|
       name =        thing.css(".mntl-sc-block-heading__text").text
       name =        thing.css(".mntl-sc-block-heading__link").text if name == "" #covers case if name is a link
+      
       website =     thing.css(".mntl-sc-block-location__website-text").attr("href") 
       website =     thing.css(".mntl-sc-block-heading__link").attr("href") if website == nil #covers edge case when no website, but website in name link
       address =     thing.css(".mntl-sc-block-location__address").text.strip
@@ -49,6 +50,8 @@ class BeerProject::Scraper
       #need to add a error that misses cities without all information
       else
       BeerProject::City.new(name, website)
+      
+      #("Things To Do"|| "Restaurants" || "Nightlife" || "Inspiration" || "Neighborhoods" || "Essentials" || "Events" || "Weird & Amazing" || "Getaways" || "Boston")
       end
     end
   end

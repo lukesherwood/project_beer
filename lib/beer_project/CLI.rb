@@ -1,14 +1,12 @@
 class BeerProject::CLI
   @input = ""
   def start
-    while @input != "exit" do
     puts "Welcome to Find a Brewery CLI app"
     puts "\nAt any time type exit to close the app"
     cities
     get_user_city
     breweries
     get_user_brewery
-    end
   end
   
   def cities
@@ -31,9 +29,6 @@ class BeerProject::CLI
   end
   
   def get_user_brewery
-    if gets.strip == "exit"
-      @input = "exit"
-    else
     begin
     chosen_brewery_number = gets.strip.to_i-1
     rescue
@@ -48,13 +43,9 @@ class BeerProject::CLI
       sleep(1)
       get_user_brewery
     end
-    end
   end
   
   def get_user_city
-    if gets.strip == "exit"
-      @input = "exit"
-    else 
     begin
     chosen_city_number = gets.strip.to_i-1
     rescue 
@@ -68,7 +59,6 @@ class BeerProject::CLI
       puts "\nThat isn't a valid option"
       sleep(1)
       get_user_city
-    end
     end
   end
   
@@ -85,6 +75,6 @@ class BeerProject::CLI
     puts "\nShowing informaton for:\n#{@breweries[brewery_number].name}"
     puts @breweries[brewery_number].blurb
     puts "\nPhone:#{@breweries[brewery_number].phone_number}" unless @breweries[brewery_number].phone_number = ""
-    puts "Find more information at their website: #{@breweries[brewery_number].website}" unless @breweries[brewery_number].website == ""
+    puts "\nFind more information at their website: #{@breweries[brewery_number].website}" unless @breweries[brewery_number].website == ""
   end
 end
