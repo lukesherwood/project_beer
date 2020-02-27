@@ -5,15 +5,9 @@ class BeerProject::Scraper
   end
   
   def self.scrape_brewery_info
-  #begin
-  doc = Nokogiri::HTML(open(@site))
-  things = doc.css(".comp.list-sc-item.mntl-block")
-  #rescue
-  #puts "\nThat is not valid\n"
-  #sleep(2)
-  #BeerProject::CLI.new.start
-  #end
-  things.each do |thing|
+    doc = Nokogiri::HTML(open(@site))
+    things = doc.css(".comp.list-sc-item.mntl-block")
+    things.each do |thing|
       name =        thing.css(".mntl-sc-block-heading__text").text
       name =        thing.css(".mntl-sc-block-heading__link").text if name == "" #covers case if name is a link
       website =     thing.css(".mntl-sc-block-location__website-text").attr("href") 
@@ -22,10 +16,10 @@ class BeerProject::Scraper
       blurb =       thing.css(".comp.text-passage").text
       phone_number= thing.css(".mntl-sc-block-location__phone-text").text
       
-    brewery = BeerProject::Brewery.new(name, address)
-    brewery.website = website
-    brewery.blurb = blurb
-    brewery.phone_number = phone_number
+      brewery = BeerProject::Brewery.new(name, address)
+      brewery.website = website
+      brewery.blurb = blurb
+      brewery.phone_number = phone_number
     end
   end
   
@@ -41,17 +35,11 @@ class BeerProject::Scraper
 
     things = doc.css(".comp.l-container.search-results-list li")
     things.each do |thing|
-      begin
       name = thing.css(".card__tag").attr("data-tag").text
       website = thing.css(".comp.card").attr("href").text
-      rescue NoMethodError
-        next
-      #need to add a error that misses cities without all information
-      else
       BeerProject::City.new(name, website)
       
       #("Things To Do"|| "Restaurants" || "Nightlife" || "Inspiration" || "Neighborhoods" || "Essentials" || "Events" || "Weird & Amazing" || "Getaways" || "Boston")
-      end
     end
   end
   
@@ -65,9 +53,8 @@ class BeerProject::Scraper
       begin
       name = thing.css(".card__tag").attr("data-tag").text
       website = thing.css(".comp.card").attr("href").text
-      rescue NoMethodError
+      rescue NoMethodError #this stops the error when cities don't have all the info
         next
-      #need to add a error that misses cities without all information
       else
       BeerProject::City.new(name, website)
       end

@@ -117,6 +117,7 @@ class BeerProject::CLI
       exit
     else 
       puts "Please enter Y or exit"
+      @input = gets.strip.downcase
     end
   end
   
