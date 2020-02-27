@@ -1,13 +1,12 @@
 class BeerProject::Brewery
   @@all = []
   
-  attr_accessor :name, :address, :website, :blurb, :phone_number
+  attr_accessor :name, :address, :website, :blurb, :phone_number, :city
   
-  #does brewery need to know about its city?
-  
-  def initialize(name, address)
+  def initialize(name, address, city = BeerProject::City.name)
 	  @name = name
 	  @address = address
+	  @city = city
 		@@all << self
   end
   

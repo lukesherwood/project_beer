@@ -2,9 +2,13 @@ class BeerProject::City
   attr_accessor :name, :website
   @@all = []
   def initialize(name, website)
-    @name = name
+    @@name = name
     @website = website
     @@all << self
+  end
+  
+  def self.name
+    @@name
   end
   
   #does city need to know about its breweries?
@@ -15,5 +19,6 @@ class BeerProject::City
     #can we move this to the scraper class - it ugly
   end
   
-  
 end
+#c = BeerProject::City.new("sname", "webs")
+#b = BeerProject::Brewery.new("Bname", "Baddress")
