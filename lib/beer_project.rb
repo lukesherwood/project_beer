@@ -8,6 +8,7 @@ require 'pry'
 require 'nokogiri'
 require 'open-uri'
 require 'rubygems'
+require 'launchy'
 
 module BeerProject
   class Error < StandardError; end
