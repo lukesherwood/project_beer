@@ -2,16 +2,18 @@ class BeerProject::City
   attr_accessor :name, :website
   @@all = []
   def initialize(name, website)
-    @@name = name
+    @name = name
     @website = website
     @@all << self
   end
   
   def self.name
-    @@name
+    @@name = @name
   end
   
-  #does city need to know about its breweries?
+  def breweries
+    BeerProject::Brewery.all
+  end
   
   def self.all
     BeerProject::Scraper.scrape_cities if @@all.empty? 
@@ -20,5 +22,3 @@ class BeerProject::City
   end
   
 end
-#c = BeerProject::City.new("sname", "webs")
-#b = BeerProject::Brewery.new("Bname", "Baddress")

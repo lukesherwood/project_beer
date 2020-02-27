@@ -11,7 +11,6 @@ class BeerProject::Brewery
   end
   
   def self.all
-    #needs to clear on loop
     BeerProject::Scraper.scrape_brewery_info if @@all.empty? 
     @@all
   end

@@ -16,6 +16,7 @@ class BeerProject::CLI
   def cities
     puts "\nWhat city are you in?"
     @cities = BeerProject::City.all
+    #can I sort the @cities?
     puts "Choose your city by entering the number\n"
     @cities.each.with_index(1) do |city, index|
       puts "#{index}. #{city.name}"
