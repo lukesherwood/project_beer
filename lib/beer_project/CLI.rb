@@ -37,21 +37,21 @@ class BeerProject::CLI
     if @input == "exit"
       exit
     else
-    begin
-    chosen_brewery_number = @input.to_i-1
-    rescue
-    puts "\nThat isn't a valid option"
-    sleep(1)
-    get_user_brewery
-    end
-    if valid_input?(chosen_brewery_number, @breweries)
-      show_brewery_info(chosen_brewery_number) 
-    else
-      puts "\nThat isn't a valid option"
-      sleep(1)
-      get_user_brewery
+      begin
+      chosen_brewery_number = @input.to_i-1
+      rescue
+        puts "\nThat isn't a valid option"
+        sleep(1)
+        get_user_brewery
+      end
+      if valid_input?(chosen_brewery_number, @breweries)
+        show_brewery_info(chosen_brewery_number) 
+      else
+        puts "\nThat isn't a valid option"
+        sleep(1)
+        get_user_brewery
       #can we combine these two error handlers into one?
-    end
+      end
     end
   end
   #this is a duplicate from below can we abstract and combine?
@@ -74,13 +74,13 @@ class BeerProject::CLI
         sleep(1)
         get_user_city
       #can we combine these two error handlers into one?
-    end
+      end
     end
   end
   #this is a duplicate from above can we abstract and combine?
   
   def valid_input?(input, data)
-    input.to_i <= data.length && input.to_i >= 0 
+    input < data.length && input >= 0 
   end
   
   def show_breweries_for(city_number)
@@ -98,11 +98,13 @@ class BeerProject::CLI
   end
   
   def gets_exit_or_restart
-    puts "Do you want to see any other cities? Y or exit"
+    puts "\nDo you want to see any other cities? Y or exit"
     @input = gets.strip.downcase
     if @input == "y"
       BeerProject::Brewery.clear
       start
+    elsif @input == 'exit'
+      exit
     else 
       puts "Please enter Y or exit"
     end
