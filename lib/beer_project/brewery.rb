@@ -3,9 +3,8 @@ class BeerProject::Brewery
   
   attr_accessor :name, :address, :website, :blurb, :phone_number, :city
   
-  def initialize(name, address, city = BeerProject::City.name)
-	  @name = name
-	  @address = address
+  def initialize(name, city = BeerProject::City.name)
+    @name = name
 	  @city = city
 		@@all << self
   end

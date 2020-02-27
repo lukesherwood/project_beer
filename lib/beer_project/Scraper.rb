@@ -16,7 +16,8 @@ class BeerProject::Scraper
       blurb =       thing.css(".comp.text-passage").text
       phone_number= thing.css(".mntl-sc-block-location__phone-text").text
       
-      brewery = BeerProject::Brewery.new(name, address)
+      brewery = BeerProject::Brewery.new(name)
+      brewery.address = address
       brewery.website = website
       brewery.blurb = blurb
       brewery.phone_number = phone_number
@@ -29,7 +30,7 @@ class BeerProject::Scraper
   end
   
   def self.scrape_cities_page1
-    @pages = ["https://www.tripsavvy.com/search?q=best%20breweries", "https://www.tripsavvy.com/search?q=best%20breweries&offset=24", "https://www.tripsavvy.com/search?q=best%20breweries&offset=48"]
+    @pages = ["https://www.tripsavvy.com/search?q=best%20breweries", "https://www.tripsavvy.com/search?q=best%20breweries&offset=24"]
     
     doc = Nokogiri::HTML(open(@pages[0]))
 
@@ -44,7 +45,7 @@ class BeerProject::Scraper
   end
   
   def self.scrape_cities_page2
-    @pages = ["https://www.tripsavvy.com/search?q=best%20breweries", "https://www.tripsavvy.com/search?q=best%20breweries&offset=24", "https://www.tripsavvy.com/search?q=best%20breweries&offset=48"]
+    @pages = ["https://www.tripsavvy.com/search?q=best%20breweries", "https://www.tripsavvy.com/search?q=best%20breweries&offset=24"]
     
     doc = Nokogiri::HTML(open(@pages[1]))
 
