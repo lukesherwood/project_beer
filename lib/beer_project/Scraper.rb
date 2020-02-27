@@ -38,9 +38,10 @@ class BeerProject::Scraper
     things.each do |thing|
       name = thing.css(".card__tag").attr("data-tag").text
       website = thing.css(".comp.card").attr("href").text
-      BeerProject::City.new(name, website)
       
-      #("Things To Do"|| "Restaurants" || "Nightlife" || "Inspiration" || "Neighborhoods" || "Essentials" || "Events" || "Weird & Amazing" || "Getaways" || "Boston")
+      not_cities = ["Things To Do", "Restaurants", "Nightlife", "Inspiration", "Neighborhoods", "Essentials", "Events", "Weird & Amazing", "Getaways", "Boston"]
+      BeerProject::City.new(name, website) unless not_cities.include? name
+      
     end
   end
   
@@ -57,7 +58,8 @@ class BeerProject::Scraper
       rescue NoMethodError #this stops the error when cities don't have all the info
         next
       else
-      BeerProject::City.new(name, website)
+      not_cities = ["Things To Do", "Restaurants", "Nightlife", "Inspiration", "Neighborhoods", "Essentials", "Events", "Weird & Amazing", "Getaways", "Boston"]
+      BeerProject::City.new(name, website) unless not_cities.include? name
       end
     end
   end
