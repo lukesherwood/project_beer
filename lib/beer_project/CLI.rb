@@ -2,12 +2,12 @@ class BeerProject::CLI
   @input = ""
   def start
     while @input != 'exit' do
-    welcome
-    cities
-    get_user_city
-    breweries
-    get_user_brewery
-    get_exit_or_restart
+      welcome
+      cities
+      get_user_city
+      breweries
+      get_user_brewery
+      get_exit_or_restart
     end
   end
   
@@ -29,24 +29,21 @@ class BeerProject::CLI
   
   def get_user_city
     @input = gets.strip.downcase
-    if @input == "exit"
-      exit
-    else
-      begin
-        chosen_city_number = @input.to_i-1
-        rescue 
-        puts "\nThat isn't a valid option"
-        sleep(1)
-        get_user_city
-      end
-      if valid_input?(chosen_city_number, @cities) 
-        show_breweries_for(chosen_city_number)
-      else 
-        puts "\nThat isn't a valid option"
-        sleep(1)
-        get_user_city
-      #can we combine these two error handlers into one?
-      end
+    exit if @input == "exit"
+    begin
+      chosen_city_number = @input.to_i - 1
+      rescue 
+      puts "\nThat isn't a valid option"
+      sleep(1)
+      get_user_city
+    end
+    if valid_input?(chosen_city_number, @cities) 
+      show_breweries_for(chosen_city_number)
+    else 
+      puts "\nThat isn't a valid option"
+      sleep(1)
+      get_user_city
+    #can we combine these two error handlers into one?
     end
   end
   
@@ -62,27 +59,22 @@ class BeerProject::CLI
   
   def get_user_brewery
     @input = gets.strip.downcase
-    if @input == "exit"
-      exit
-    else
-      begin
-      chosen_brewery_number = @input.to_i-1
+    exit if @input == "exit"
+    begin
+      chosen_brewery_number = @input.to_i - 1
       rescue
-        puts "\nThat isn't a valid option"
-        sleep(1)
-        get_user_brewery
-      end
-      if valid_input?(chosen_brewery_number, @breweries)
-        show_brewery_info(chosen_brewery_number) 
-      else
-        puts "\nThat isn't a valid option"
-        sleep(1)
-        get_user_brewery
-      #can we combine these two error handlers into one?
-      end
+      puts "\nThat isn't a valid option"
+      sleep(1)
+      get_user_brewery
+    end
+    if valid_input?(chosen_brewery_number, @breweries)
+      show_brewery_info(chosen_brewery_number) 
+    else
+      puts "\nThat isn't a valid option"
+      sleep(1)
+      get_user_brewery
     end
   end
-  #this is a duplicate from above can we abstract and combine?
   
   def valid_input?(input, data)
     input < data.length && input >= 0 
@@ -99,16 +91,15 @@ class BeerProject::CLI
     puts @breweries[brewery_number].blurb
     puts "\nPhone:#{@breweries[brewery_number].phone_number}" unless @breweries[brewery_number].phone_number = ""
     puts "\nFind more information at their website: #{@breweries[brewery_number].website}" unless @breweries[brewery_number].website == ""
-    #puts "If you would like to go to their website type Y" unless @breweries[brewery_number].website == ""
-    #@input = gets.strip.downcase
-    #if @input == "y"
-     # system("open", "#{@breweries[brewery_number].website}")
-    #end
-    #can we open website if they ask to?, or even open in maps with address?
+    puts "Would like to go to their website? Enter Y or N" unless @breweries[brewery_number].website == ""
+    @input = gets.strip.downcase
+    if @input == "y"
+     system("open", "#{@breweries[brewery_number].website}")
+    end
   end
   
   def get_exit_or_restart
-    puts "\nDo you want to see any other cities? Y or exit"
+    puts "\nDo you want to see any other cities? Enter Y or exit"
     @input = gets.strip.downcase
     if @input == "y"
       BeerProject::Brewery.clear
