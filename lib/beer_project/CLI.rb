@@ -87,11 +87,11 @@ class BeerProject::CLI
     puts @breweries[brewery_number].blurb
     puts "\nPhone:#{@breweries[brewery_number].phone_number}" unless @breweries[brewery_number].phone_number = ""
     puts "\nFind more information at their website: #{@breweries[brewery_number].website}" unless @breweries[brewery_number].website == ""
-    puts "Would like to go to their website? Enter Y or N" unless @breweries[brewery_number].website == ""
-    @input = gets.strip.downcase
-    if @input == "y"
-     system("open", "#{@breweries[brewery_number].website}")
-    end
+    #puts "Would like to go to their website? Enter Y or N" unless @breweries[brewery_number].website == ""
+    #@input = gets.strip.downcase
+    #if @input == "y"
+     #system("open", "#{@breweries[brewery_number].website}")
+    #end
   end
   
   def get_exit_or_restart
