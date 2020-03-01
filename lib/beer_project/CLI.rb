@@ -20,7 +20,6 @@ class BeerProject::CLI
   def cities
     puts "\nWhat city are you in?"
     @cities = BeerProject::City.all
-    #can I sort the @cities?
     puts "Choose your city by entering the number\n"
     @cities.each.with_index(1) do |city, index|
       puts "#{index}. #{city.name}"
@@ -43,12 +42,10 @@ class BeerProject::CLI
       puts "\nThat isn't a valid option"
       sleep(1)
       get_user_city
-    #can we combine these two error handlers into one?
     end
   end
   
   def breweries
-    #second loop we get first loops breweries
     puts "\nEnter the number of the brewery you want to know more about"
     @breweries = BeerProject::Brewery.all
     @breweries.each.with_index(1) do |brewery, index|
@@ -87,7 +84,6 @@ class BeerProject::CLI
   
   def show_brewery_info(brewery_number)
     puts "\nShowing informaton for:\n#{@breweries[brewery_number].name}"
-    #do we need an address shown here or on intial puts?
     puts @breweries[brewery_number].blurb
     puts "\nPhone:#{@breweries[brewery_number].phone_number}" unless @breweries[brewery_number].phone_number = ""
     puts "\nFind more information at their website: #{@breweries[brewery_number].website}" unless @breweries[brewery_number].website == ""
