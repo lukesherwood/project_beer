@@ -1,6 +1,6 @@
 # BeerProject
 
-Find the best breweries in the city of Cleveland
+Find the best breweries by city
 
 ## Installation
 
@@ -20,7 +20,10 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+run ./bin/breweries 
+select a city by entering a number
+select a brewery by entering a number
+selecct Y if you want to rerun the app, or enter exit
 
 ## Development
 
