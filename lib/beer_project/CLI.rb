@@ -86,7 +86,7 @@ class BeerProject::CLI
     puts "\nShowing informaton for:\n#{@breweries[brewery_number].name}".blue
     puts @breweries[brewery_number].blurb
     puts "\nPhone:#{@breweries[brewery_number].phone_number}" unless @breweries[brewery_number].phone_number = ""
-    puts "\nFind more information at their website: #{@breweries[brewery_number].website}" unless @breweries[brewery_number].website == ""
+    puts "\nFind more information at their website: \n#{@breweries[brewery_number].website}" unless @breweries[brewery_number].website == ""
     #puts "Would like to go to their website? Enter Y or N" unless @breweries[brewery_number].website == ""
     #@input = gets.strip.downcase
     #if @input == "y"
