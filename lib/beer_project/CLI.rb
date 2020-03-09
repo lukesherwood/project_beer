@@ -68,15 +68,19 @@ class BeerProject::CLI
   end
   
   def show_breweries_for(city_number)
-    puts "\nShowing breweries in \n#{@cities[city_number].name}".blue
-    BeerProject::Scraper.site = @cities[city_number].website #bad code smell?
+    city = @cities[city_number]
+
+    puts "\nShowing breweries in \n#{city.name}".blue
+    BeerProject::Scraper.site = city.website
   end
   
   def show_brewery_info(brewery_number)
-    puts "\nShowing informaton for:\n#{@breweries[brewery_number].name}".blue
-    puts @breweries[brewery_number].blurb
-    puts "\nPhone:#{@breweries[brewery_number].phone_number}" unless @breweries[brewery_number].phone_number = ""
-    puts "\nFind more information at their website: \n#{@breweries[brewery_number].website}" unless @breweries[brewery_number].website == ""
+    brewery = @breweries[brewery_number]
+  
+    puts "\nShowing informaton for:\n#{brewery.name}".blue
+    puts brewery.blurb
+    puts "\nPhone:#{brewery.phone_number}" unless brewery.phone_number = ""
+    puts "\nFind more information at their website: \n#{brewery.website}" unless brewery.website == ""
   end
   
   def get_exit_or_restart
