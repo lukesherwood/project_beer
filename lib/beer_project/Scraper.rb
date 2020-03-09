@@ -6,15 +6,16 @@ class BeerProject::Scraper
   
   def self.scrape_brewery_info
     doc = Nokogiri::HTML(open(@site))
-    things = doc.css(".comp.list-sc-item.mntl-block")
-    things.each do |thing|
-      name =        thing.css(".mntl-sc-block-heading__text").text
-      name =        thing.css(".mntl-sc-block-heading__link").text if name == "" #covers case if name is a link
-      website =     thing.css(".mntl-sc-block-location__website-text").attr("href") 
-      website =     thing.css(".mntl-sc-block-heading__link").attr("href") if website == nil #covers edge case when no website, but website in name link
-      address =     thing.css(".mntl-sc-block-location__address").text.strip
-      blurb =       thing.css(".comp.text-passage").text
-      phone_number= thing.css(".mntl-sc-block-location__phone-text").text
+
+    cards = doc.css(".comp.list-sc-item.mntl-block")
+    cards.each do |attributes|
+      name =        attributes.css(".mntl-sc-block-heading__text").text
+      name =        attributes.css(".mntl-sc-block-heading__link").text if name == "" #covers case if name is a link
+      website =     attributes.css(".mntl-sc-block-location__website-text").attr("href") 
+      website =     attributes.css(".mntl-sc-block-heading__link").attr("href") if website == nil #covers case when no website, but website in name link
+      address =     attributes.css(".mntl-sc-block-location__address").text.strip
+      blurb =       attributes.css(".comp.text-passage").text
+      phone_number= attributes.css(".mntl-sc-block-location__phone-text").text
       
       brewery = BeerProject::Brewery.new(name)
       brewery.address = address
@@ -36,7 +37,7 @@ class BeerProject::Scraper
           begin
             name = attributes.css(".card__tag").attr("data-tag").text
             website = attributes.css(".comp.card").attr("href").text
-            rescue NoMethodError #skips to next when cities don't have all the info
+            rescue NoMethodError #skips to when cities don't have all the info
               next
             else
               not_cities = ["Things To Do", "Restaurants", "Nightlife", "Inspiration", "Neighborhoods", "Essentials", "Events", "Weird & Amazing", "Getaways", "Boston"]
