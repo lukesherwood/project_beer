@@ -13,31 +13,29 @@ class BeerProject::CLI
   
   def welcome
     puts "Welcome to Find a Brewery CLI app".blue
-    puts "\nType exit at any time to close the app"
+    puts "\nYou can type exit at any time to close the app"
   end
     
   
   def cities
     puts "\nWhat city are you in?".green
     @cities = BeerProject::City.all
-    puts "Choose your city by entering the number\n"
+    puts "Choose your city by entering the number"
     @cities.each.with_index(1) do |city, index|
       puts "#{index}. #{city.name}"
     end
   end
   
-  def get_user_city
+  def get_user_input
     @input = gets.strip.downcase
     exit if @input == "exit"
-    begin
-      chosen_city_number = @input.to_i - 1
-      rescue 
-      puts "\nThat isn't a valid option".red
-      sleep(1)
-      get_user_city
-    end
-    if valid_input?(chosen_city_number, @cities) 
-      show_breweries_for(chosen_city_number)
+    @input = @input.to_i - 1    
+  end
+
+  def get_user_city
+    get_user_input
+    if valid_input?(@input, @cities) 
+      show_breweries_for(@input)
     else 
       puts "\nThat isn't a valid option".red
       sleep(1)
@@ -55,21 +53,13 @@ class BeerProject::CLI
   end
   
   def get_user_brewery
-    @input = gets.strip.downcase
-    exit if @input == "exit"
-    begin
-      chosen_brewery_number = @input.to_i - 1
-      rescue
-      puts "\nThat isn't a valid option".red
-      sleep(1)
-      get_user_brewery
-    end
-    if valid_input?(chosen_brewery_number, @breweries)
-      show_brewery_info(chosen_brewery_number) 
+    get_user_input
+    if valid_input?(@input, @breweries)
+      show_brewery_info(@input) 
     else
       puts "\nThat isn't a valid option".red
       sleep(1)
-      get_user_brewery
+      get_user_input
     end
   end
   
