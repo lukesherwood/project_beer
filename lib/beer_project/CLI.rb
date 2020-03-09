@@ -37,7 +37,7 @@ class BeerProject::CLI
     if valid_input?(@input, @cities) 
       show_breweries_for(@input)
     else 
-      puts "\nThat isn't a valid option".red
+      puts "\nThat isn't a valid option, try again".red
       sleep(1)
       get_user_city
     end
@@ -57,7 +57,7 @@ class BeerProject::CLI
     if valid_input?(@input, @breweries)
       show_brewery_info(@input) 
     else
-      puts "\nThat isn't a valid option".red
+      puts "\nThat isn't a valid option, try again".red
       sleep(1)
       get_user_brewery
     end
