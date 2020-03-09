@@ -29,7 +29,7 @@ class BeerProject::CLI
   def get_user_input
     @input = gets.strip.downcase
     exit if @input == "exit"
-    @input = @input.to_i - 1    
+    @input = @input.to_i - 1
   end
 
   def get_user_city
@@ -59,7 +59,7 @@ class BeerProject::CLI
     else
       puts "\nThat isn't a valid option".red
       sleep(1)
-      get_user_input
+      get_user_brewery
     end
   end
   
