@@ -21,7 +21,7 @@ class BeerProject::CLI
     puts "\nWhat city are you in?".green
     @cities = BeerProject::City.all
     puts "Choose your city by entering the number"
-    @cities.each.with_index(1) do |city, index|
+    @cities.sort_by {|city| city.name}.each.with_index(1) do |city, index| #sorts the array then iterates through it but when selecting option its in the old unorganised list.
       puts "#{index}. #{city.name}"
     end
   end
